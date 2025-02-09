@@ -12,7 +12,13 @@ Data structure = organizes data
 - To generate the HTML manually, we loop through the array where we saved the data into, and display the HTML we generated on the console 
 - Then, we combine this HTML together and save it in a variable
 - And, we put it on the webpage (using the DOM)
-3. Make it interactive
+3. Make it interactive:
+- To make it interactive, we add event listener to all buttons using queryselectorAll and forEach to loop.
+- Then, with each click add a product to the cart array using .push().
+Steps:
+1. Check if the product is already in the cart. By looping through the cart array using forEach we can check that.
+2. If it is in the cart, increase the quantity.
+3. If it is not in the cart, add it to the cart.
 */
 
 let productsHTML = '';
@@ -63,13 +69,55 @@ products.forEach((product) => {
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">
+      <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}"> 
         Add to Cart
       </button>
     </div>
   `;
 });
 
-console.log(productsHTML);
-
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  button.addEventListener('click', () => {
+    const productId = button.dataset.productId;
+
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+    
+    console.log(cart);
+  });
+}); 
+
+/* How do you know which product to add?
+Data Attribute: is just another HTML attribute.
+** The data- attribute (also called data attributes) in HTML allows you to store custom data on HTML elements. These attributes don’t affect how the element looks or behaves, but they can hold information that you can access using JavaScript.
+
+Syntax for a Data Attribute
+Example:
+name: data-product-name, The name have to start with "data-" then give it any name. And the case used is called kebab-case.
+value: ${product.name} 
+
+syntax: data-key="value"
+1) data-: The prefix that tells the browser this is a custom data attribute.
+2) key: The name you give to the data (e.g., data-user, data-id, data-category).
+3) value: The actual data you store (e.g., 123, admin, electronics)
+*/
+
+/*
+The data set property basically gives us all the data attributes that are attached to the html element. This time, the add-to-cart button.
+ */
