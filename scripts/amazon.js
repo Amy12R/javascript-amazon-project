@@ -21,6 +21,8 @@ Steps:
 3. If it is not in the cart, add it to the cart.
 */
 
+import {cart} from '../data/cart.js';  
+
 let productsHTML = '';
 
 products.forEach((product) => {
@@ -127,3 +129,20 @@ syntax: data-key="value"
 /*
 The data set property basically gives us all the data attributes that are attached to the html element. This time, the add-to-cart button.
  */
+
+/* Create a Module
+1. Create a file
+2. Don't load the file with <script>
+By doing this, any variables we create inside the file, will be contained inside the file.
+
+How to Get a Variable Out of a File or a Module?
+1. Add type="module" attribute
+2. Export
+3. Import - we have to put all imports at the top of the file.
+- In order for modules to work, we need to use Live Server. 
+
+Benefits of Modules
+1. It helps us avoid naming conflicts.
+2. We actually don't have to worry about order of files.
+Modules are a better way to organize our code.
+*/

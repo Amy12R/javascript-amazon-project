@@ -1,1 +1,1 @@
-const cart = []; 
+export const cart = []; // Because of 'export', now this variable can be used outside of cart.js 
