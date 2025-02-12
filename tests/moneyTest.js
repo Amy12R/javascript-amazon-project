@@ -65,5 +65,12 @@ Testing Framework
 Most testing frameworks are similar.
 Other testing frameworks: Jest (for ReactJS), MochaJS
 
-A testing framework helps us do all of the things we were doing before and it also provides a nice looking website where we can see all the test results. 
+A testing framework helps us do all of the things we were doing before and it also provides a nice looking website where we can see all the test results.
+
+Best Practice in Testing:
+- Test each condition of an if-statement
+- We try to maximize test coverage
+
+Test Coverage = how much of the code is being tested
+
 */
