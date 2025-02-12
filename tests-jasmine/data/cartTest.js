@@ -42,3 +42,16 @@ describe('test suite: addToCart', () => {
   });
 });
 
+/*
+How to create more complicated tests?
+Unit Test = testing 1 piece of the code
+
+Integration Test = tests many units/pieces of code working together
+
+Hook = lets us run some code for each test
+  beforeEach() = runs code before each test
+  afterEach() = runs code after each test
+  beforeAll() = runs before all tests
+  afterAll() = runs code after all tests
+*/
+
