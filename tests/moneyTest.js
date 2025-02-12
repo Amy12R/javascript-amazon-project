@@ -63,5 +63,7 @@ A group of related tests is called a test suite.
 Testing Framework
 = external library that helps us write tests easier
 Most testing frameworks are similar.
-Other testing frameworks. Jest (for ReactJS),
+Other testing frameworks: Jest (for ReactJS), MochaJS
+
+A testing framework helps us do all of the things we were doing before and it also provides a nice looking website where we can see all the test results. 
 */
