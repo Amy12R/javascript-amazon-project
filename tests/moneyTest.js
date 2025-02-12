@@ -45,13 +45,23 @@ Disadvantages of Manual Testing:
 2. Hard to re-test the code
 
 Automated testing = using code to test code
+Steps:
+1. Create test suite
+2. Create tests
+3. Compare values and display result
+
 
 2 Types of Test Cases:
-1. Basic test csses = tests if the code is working or not
+1. Basic test cases = tests if the code is working or not
 2. Edge cases = test with values that are a little bit tricky, in our case, the last two cases are edge cases. 
 
 Automated test make it really easy to retest our code after we make any changes.
 
 When we do testing, we group related tests together. 
-A group of related tests is called a test suite.  
+A group of related tests is called a test suite.
+
+Testing Framework
+= external library that helps us write tests easier
+Most testing frameworks are similar.
+Other testing frameworks. Jest (for ReactJS),
 */
