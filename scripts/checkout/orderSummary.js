@@ -4,12 +4,7 @@ import { formatCurrency } from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'; // Named export - with curly brackets
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'; // Default export
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
-
-hello(); 
-
-const today = dayjs();
-const deliveryDate = today.add(7, 'days');
-console.log(deliveryDate.format('dddd, MMMM D'));   
+import { renderPaymentSummary } from './paymentSummary.js'; 
 
 export function renderOrderSummary() {
 
@@ -129,6 +124,8 @@ export function renderOrderSummary() {
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       
       container.remove();
+
+      renderPaymentSummary(); 
     });
   });
 
@@ -137,6 +134,7 @@ export function renderOrderSummary() {
       const {productId, deliveryOptionId} = element.dataset; // Using shorthand property
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary(); // A function can call/ re-run itself. And this feature is called recursion.
+      renderPaymentSummary(); // Regenerates the html for the payment summary
     });
   });
 }
