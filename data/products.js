@@ -34,6 +34,10 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  }
 }
 
 // Converting an object into a class: it is basically taking a regular object and put it inside a class and then we copy over the properties. 
@@ -55,6 +59,47 @@ const product1 = new Product({
   });  
 
 // Instead of using regular objects in the 'products' array, we are going to use a class to generate the objects. 
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  // If we don't create a constructor by default, it will run the parents constructor. So even when the class is empty, the code still works.
+
+  constructor(productDetails) {
+    super(productDetails); // This will call the constructor of the parent class
+    this.sizeChartLink = productDetails.sizeChartLink; 
+  }
+
+  extraInfoHTML() {
+    // super.extraInfoHTML(); this calls one of the parent methods
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size chart
+      </a>
+    `;
+  } // Method overriding
+}
+
+const tshirt = new Clothing({
+    id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+    name: "Adults Plain Cotton T-Shirt - 2 Pack",
+    rating: {
+      stars: 4.5,
+      count: 56
+    },
+    priceCents: 799,
+    keywords: [
+      "tshirts",
+      "apparel",
+      "mens"
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
+  });
+console.log(tshirt); 
+console.log(tshirt.getPrice()); 
+
 
 export const products = [
   {
@@ -100,7 +145,7 @@ export const products = [
       "apparel",
       "mens"
     ],
-    type: "clothing",
+    type: "clothing", // Discriminator property: it tells us which class we should convert this to.
     sizeChartLink: "images/clothing-size-chart.png"
   },
   {
@@ -716,5 +761,24 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails); 
+  }
   return new Product(productDetails); 
 }); 
+
+// Inheritance = a feature in OOP that allows one class to get all the properties and methods from another class. 
+// Inheritance = lets us reuse code between classes.
+// The child class inherits properties and methods from the parent class. 
+
+/* ${product.extraInfoHTML()} = use a method without knowing the class( which is called polymorphism), and then the class will determine what this method does. 
+
+Polymorphism is an alternative to using if-statements/Ternary operator.
+
+${
+  product instanceof Clothing 
+    ? `<a href="${product.sizeChartLink}">Size chart</a>`
+    : ''
+}
+*/
+
