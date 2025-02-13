@@ -1,14 +1,14 @@
 class Cart {
-  cartItems;
-  localStorageKey;  
+  cartItems; // A property without a has infront, is called a public property. 
+  #localStorageKey; // To make the property 'localStorageKey' private, we are just gonna add a number sign or a hash infront. And also whenever we access this property inside the class, we are gonna add the hash infront.   
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey; // We can replace the 'objectName' with 'this'. 'this' points to the object that we generate.
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey; // We can replace the 'objectName' with 'this'. 'this' points to the object that we generate.
+    this.#loadFromStorage();
   } // Each object that we create is going to run the constructor, so we only need to setup the code for one object.
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [
@@ -27,7 +27,7 @@ class Cart {
   }
 
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   } // Shortcut for: saveToStorage: function() {
 
   addToCart(productId) {
@@ -88,10 +88,9 @@ const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business'); 
 // Each object we generate from a class is called an instance. 
 
-console.log(businessCart instanceof Cart); // We can also check if an object is an instance of a class using the code: objectName instanceof ClassName;   
-
 console.log(cart);
 console.log(businessCart); 
+console.log(businessCart instanceof Cart); // We can also check if an object is an instance of a class using the code: objectName instanceof ClassName;
 
 /* 
 Class = object generator
@@ -106,4 +105,6 @@ Classes have extra features for Object-Oriented Programming.
 More details about constructor: 
 1. The method has to be named "constructor".
 2. We also should not return anything from a constructor.
+
+Classes let us make a property or a method private, i.e., it can only be accessed inside the class.  
 */
