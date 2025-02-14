@@ -83,6 +83,19 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
   saveToStorage();
 } 
+
+export function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+    fun(); 
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.send();
+}
+
 /* When we update a delivery option, we need to know the product that we want to update as well as the delivery option that we chose.
 
 Steps: 
