@@ -100,6 +100,37 @@ const tshirt = new Clothing({
 console.log(tshirt); 
 console.log(tshirt.getPrice()); 
 
+/*
+const date = new Date(); // Example of a built-in class, it generates an object that represents the current date. And every date object has a method called: .toLocaleTimeString().
+
+console.log(date.toLocaleTimeString()); // Output: current local time
+console.log(date); 
+*/
+
+/*
+console.log(this); // Output: undefined
+
+const object2 = {
+  a: 2,
+  b: this.a
+}; // Gives an error in the console 
+*/  
+
+/*
+function logThis() {
+  console.log(this); 
+} // "this" is not inside of any object so there's nothing for "this" to point to. this = undefined
+logThis(); 
+logThis.call('hello'); // this = hello, inside a function, we can change "this" to whatever we want using a method like .call() 
+
+const object3 = {
+  method: () => {
+    console.log(this); // Arrow functions do not change the value of "this". "this" will have the same value as outside the arrow function
+  }
+};
+
+object3.method(); // Output: undefined
+*/
 
 export const products = [
   {

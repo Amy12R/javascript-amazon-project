@@ -3,12 +3,12 @@ class Cart {
   #localStorageKey; // To make the property 'localStorageKey' private, we are just gonna add a number sign or a hash infront. And also whenever we access this property inside the class, we are gonna add the hash infront.   
 
   constructor(localStorageKey) {
-    this.#localStorageKey = localStorageKey; // We can replace the 'objectName' with 'this'. 'this' points to the object that we generate.
+    this.#localStorageKey = localStorageKey; // We can replace the 'objectName' with 'this'. 'this' points to the object that we generate. 
     this.#loadFromStorage();
   } // Each object that we create is going to run the constructor, so we only need to setup the code for one object.
 
   #loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)); // "this" lets an object access its own properties
 
     if (!this.cartItems) {
       this.cartItems = [
