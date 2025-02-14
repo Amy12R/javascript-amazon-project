@@ -97,8 +97,6 @@ const tshirt = new Clothing({
     type: "clothing",
     sizeChartLink: "images/clothing-size-chart.png"
   });
-console.log(tshirt); 
-console.log(tshirt.getPrice()); 
 
 /*
 const date = new Date(); // Example of a built-in class, it generates an object that represents the current date. And every date object has a method called: .toLocaleTimeString().

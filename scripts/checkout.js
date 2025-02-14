@@ -5,6 +5,39 @@ import { loadCart } from "../data/cart.js";
 // import '../data/cart-class.js'; // another syntax for import 
 // import '../data/backend-practice.js';
 
+async function loadPage() {
+  await loadProductsFetch(); // await lets us write asynchronous code like normal code
+
+  const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve('value3');
+    });
+  });
+
+  console.log(value); 
+  renderOrderSummary();
+  renderPaymentSummary();
+} // async makes a function return a promise.
+loadPage();
+
+/*
+function loadPage() {
+  return new Promise((resolve) => {
+    console.log('load page');
+    resolve();
+
+  }).then(() => {
+    return loadProductsFetch();
+
+  });then(() => {
+    return new promise((resolve) => {
+      resolve('value2');
+    });
+  });
+}
+*/
+
+/*
 Promise.all([
   loadProductsFetch(),
   new Promise ((resolve) => {
@@ -18,6 +51,7 @@ Promise.all([
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 /*
 new Promise((resolve) => {
@@ -52,8 +86,20 @@ Why do we use promises?
 - Promises let us flatten our code. So, it is recommended to use promises instead of callbacks. 
 */
 
-// fetch is a better way to make http requests because it uses promises directly. 
-// Using fetch, we can actually return a promise out of a function, and then keep attaching more steps to that promise.  
+/* 
+fetch is a better way to make http requests because it uses promises directly. 
+- Using fetch, we can actually return a promise out of a function, and then keep attaching more steps to that promise. 
+
+Async Await
+= even better way to handle asynchronous code
+= async lets us use await
+= await lets us wait for a promise to finish, before going to the next line.  
+= we can only use await, when we're inside an async function, and the closest function has to be async.
+= async await can only be used with promises. It can't be used with a callback. 
+
+Best practice
+= Use async await over promises and callbacks.
+*/
 
 /*
 loadProducts(() => {
