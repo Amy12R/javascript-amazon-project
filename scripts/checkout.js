@@ -1,16 +1,12 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js"; 
+import { loadProducts, loadProductsFetch } from "../data/products.js"; 
 import { loadCart } from "../data/cart.js";
 // import '../data/cart-class.js'; // another syntax for import 
 // import '../data/backend-practice.js';
 
 Promise.all([
-  new Promise((resolve) => {
-    loadProducts(() => {
-      resolve('value1');
-    });
-  }),
+  loadProductsFetch(),
   new Promise ((resolve) => {
     loadCart(() => {
       resolve(); 
@@ -55,6 +51,9 @@ Why do we use promises?
 - Multiple callbacks cause a lot of nesting.
 - Promises let us flatten our code. So, it is recommended to use promises instead of callbacks. 
 */
+
+// fetch is a better way to make http requests because it uses promises directly. 
+// Using fetch, we can actually return a promise out of a function, and then keep attaching more steps to that promise.  
 
 /*
 loadProducts(() => {
