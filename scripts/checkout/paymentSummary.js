@@ -2,6 +2,7 @@ import { cart } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryOptions.js';
 import { formatCurrency } from '../utils/money.js';
+import { addOrder } from '../../data/orders.js';
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;
@@ -10,13 +11,13 @@ export function renderPaymentSummary() {
   cart.forEach((cartItem) => {
     // productId => get the full product details
     const product = getProduct(cartItem.productId);
-    productPriceCents += product.priceCents * cartItem.quantity; 
+    productPriceCents += product.priceCents * cartItem.quantity;
 
     const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
     shippingPriceCents += deliveryOption.priceCents;
   });
 
-  const totalBeforeTaxCents = productPriceCents + shippingPriceCents; 
+  const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
   const taxCents = totalBeforeTaxCents * 0.1;
   const totalCents = totalBeforeTaxCents + taxCents;
 
@@ -60,13 +61,34 @@ export function renderPaymentSummary() {
       </div>
     </div>
 
-    <button class="place-order-button button-primary">
+    <button class="place-order-button button-primary js-place-order">
       Place your order
     </button> 
   `;
 
-  document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML; 
-}
+  document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
+
+  document.querySelector(".js-place-order").addEventListener("click", async () => {
+    try {
+      const response = await fetch("https://supersimplebackend.dev/orders", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        }, // headers gives the backend more information about our request.
+        body: JSON.stringify({
+          cart: cart,
+        }), // We can't send an object directly. We need to convert it into a JSON string.
+      }); // To create a post request, we will give fetch a second parameter which is an object.
+
+      const order = await response.json();
+      addOrder(order);
+    } catch {
+      console.log('Unexpected error. Try again later'); 
+    }
+
+    window.location.href = 'orders.html' // window.location is a special object provided by JavaScript. And it lets us control the URL.  
+  }); // This time we need to send some data to the backend. (We need to send our cart). To send data in a request, we need to use a different type of request. Post = lets us send data to the backend.
+} 
 
 /* 
 To calculate the items price, 
