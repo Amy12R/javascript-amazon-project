@@ -88,5 +88,12 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const url = new URL(window.location.href); // URL() = a built-in class in JS
+      console.log(url.searchParams.get('orderId'));
+      console.log(url.searchParams.get('productId')); 
+      // URL parameters = let us save data directly in the URL, to create the URL parameter we type ?property=value on the webpage at the end of the url
+    </script>
   </body>
 </html>
