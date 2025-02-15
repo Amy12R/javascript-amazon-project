@@ -6,15 +6,24 @@ import { loadCart } from "../data/cart.js";
 // import '../data/backend-practice.js';
 
 async function loadPage() {
-  await loadProductsFetch(); // await lets us write asynchronous code like normal code
+  try {
+    // throw 'error1'; // to manually create errors
+    
+    await loadProductsFetch(); // await lets us write asynchronous code like normal code
 
-  const value = await new Promise((resolve) => {
-    loadCart(() => {
-      resolve('value3');
-    });
+    const value = await new Promise((resolve, reject) => {
+      // throw 'error2'; // to manually create errors inside promise
+      loadCart(() => {
+        // reject('error3'); // to create an error in the future 
+        resolve('value3');  
+      });
   });
 
-  console.log(value); 
+  } catch (error) {
+    console.log("Unexpected error. Please try again later.");
+    reject(error); // Ensure errors are properly caught
+  }
+    
   renderOrderSummary();
   renderPaymentSummary();
 } // async makes a function return a promise.
@@ -84,6 +93,7 @@ Promises
 Why do we use promises?
 - Multiple callbacks cause a lot of nesting.
 - Promises let us flatten our code. So, it is recommended to use promises instead of callbacks. 
+- If we are using promises, there are 2 ways to manually create an error: throw and reject.  
 */
 
 /* 
@@ -96,6 +106,9 @@ Async Await
 = await lets us wait for a promise to finish, before going to the next line.  
 = we can only use await, when we're inside an async function, and the closest function has to be async.
 = async await can only be used with promises. It can't be used with a callback. 
+= to handle unexpected errors in async await, we use the syntax try/catch
+= When we get an error, it is gonna skips the rest of the code inside the curly brackets, and go straight into catch
+= We can use try/catch with synchronous code as well. 
 
 Best practice
 = Use async await over promises and callbacks.

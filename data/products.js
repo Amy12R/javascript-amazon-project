@@ -145,15 +145,19 @@ export function loadProductsFetch() {
     });
 
     console.log('load products');
-  }); // by default, it makes a GET request 
+  }).catch((error) => {
+    console.log('Unexpected error. Please try again later.'); 
+  }); // Using .catch we handle errors with promises 
 
   return promise; 
-}
+} // by default, it makes a GET request
+
 /*
 loadProductsFetch().then(() => {
   console.log('next step');
 }); 
 */
+
 
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
@@ -171,10 +175,13 @@ export function loadProducts(fun) {
     fun(); 
   });
 
+  xhr.addEventListener('error', () => {
+    console.log('Unexpected error. Please try again later.');
+  }); // When we are sending HTTP requests, we could get unexpected errors. For callbacks, we usually setup a separate callback just for errors. 
+
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-
 
 
 /*
